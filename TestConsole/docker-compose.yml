@@ -1,0 +1,11 @@
+﻿version: '3'
+
+services:
+  staging.console:
+    build: .
+    environment: 
+      - ASPNETCORE_ENVIRONMENT=Staging
+  production.console:
+    build: .
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production

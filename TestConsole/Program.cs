@@ -11,15 +11,13 @@ namespace TestConsole
         public static async Task Main(string[] args)
         {
             var builder = new HostBuilder()
+                .ConfigureHostConfiguration((config) =>
+                {
+                    config.AddEnvironmentVariables(prefix: "ASPNETCORE_");
+                })
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     config.AddJsonFile("appsettings.json", true);
-                    config.AddEnvironmentVariables();
-
-                    if (args != null)
-                    {
-                        config.AddCommandLine(args);
-                    }
                 })
                 .ConfigureServices((hostingContext, services) =>
                 {

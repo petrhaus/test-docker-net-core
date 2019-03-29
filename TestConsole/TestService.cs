@@ -12,7 +12,9 @@ namespace TestConsole
         private readonly ILogger _logger;
         private readonly IOptions<Configuration> _configuration;
 
-        public TestService(ILogger<TestService> logger, IOptions<Configuration> configuration)
+        public TestService(
+            ILogger<TestService> logger,
+            IOptions<Configuration> configuration)
         {
             _logger = logger;
             _configuration = configuration;
@@ -20,20 +22,22 @@ namespace TestConsole
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Starting.");
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            _logger.LogInformation($"Starting with environment {env}...");
 
             return Task.Run(() =>
             {
-                //throw new Exception("Error");
+                _logger.LogInformation("Started!");
             });
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Stopping.");
+            _logger.LogInformation("Stopping...");
 
             return Task.Run(() =>
             {
+                _logger.LogInformation("Stopped!");
 
             });
         }
